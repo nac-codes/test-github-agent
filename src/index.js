@@ -19,6 +19,13 @@ function divide(a, b) {
   return a / b;
 }
 
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error('Division by zero is not allowed');
+  }
+  return a % b;
+}
+
 // "Premium" functions that require API key authentication
 function validateApiKey() {
   const apiKey = process.env.TEST_API_KEY;
@@ -49,6 +56,7 @@ module.exports = {
   subtract,
   multiply,
   divide,
+  modulo,
   power,
   squareRoot,
   validateApiKey
