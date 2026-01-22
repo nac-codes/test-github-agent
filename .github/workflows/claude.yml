@@ -40,7 +40,9 @@ jobs:
           settings: |
             {
               "env": {
-                "TEST_API_KEY": "${{ secrets.TEST_API_KEY }}"
+                "TEST_API_KEY": "${{ secrets.TEST_API_KEY }}",
+                "CLOUDFLARE_API_TOKEN": "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+                "CLOUDFLARE_ACCOUNT_ID": "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
               }
             }
 
@@ -51,6 +53,7 @@ jobs:
           # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
           # prompt: 'Update the pull request description to include a summary of changes.'
 
-          # Allow Claude to run bash commands (npm, node, etc.) for testing
-          claude_args: '--allowedTools Bash(npm:*),Bash(node:*)'
+          # Allow Claude to run bash commands for testing and deployment
+          # npm/node for tests, npx wrangler for Cloudflare deployments
+          claude_args: '--allowedTools Bash(npm:*),Bash(node:*),Bash(npx wrangler:*)'
 

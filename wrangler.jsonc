@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "test-github-agent-calculator",
+  "main": "src/worker.js",
+  "compatibility_date": "2024-01-01",
+
+  // Production environment (default)
+  "vars": {
+    // TEST_API_KEY is set via secrets, not here
+  },
+
+  // Preview environment for PR deployments
+  "env": {
+    "preview": {
+      "name": "test-github-agent-calculator-preview",
+      "vars": {
+        // Preview-specific vars if needed
+      }
+    }
+  }
+}
