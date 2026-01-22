@@ -1,0 +1,13 @@
+{
+  "name": "test-github-agent",
+  "version": "1.0.0",
+  "description": "Test project for Claude Code GitHub Actions",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node src/test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
