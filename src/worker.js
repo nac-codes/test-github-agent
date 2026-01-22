@@ -23,6 +23,13 @@ function divide(a, b) {
   return a / b;
 }
 
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error('Division by zero is not allowed');
+  }
+  return a % b;
+}
+
 function power(base, exponent, env) {
   validateApiKey(env);
   return Math.pow(base, exponent);
@@ -77,6 +84,7 @@ export default {
               '/subtract': 'Subtract b from a (?a=5&b=3)',
               '/multiply': 'Multiply two numbers (?a=4&b=5)',
               '/divide': 'Divide a by b (?a=10&b=2)',
+              '/modulo': 'Modulo (remainder) of a divided by b (?a=10&b=3)',
               '/power': 'Calculate a^b (?a=2&b=3) [Premium]',
               '/sqrt': 'Square root of a (?a=16) [Premium]',
               '/health': 'Health check',
@@ -107,6 +115,11 @@ export default {
         case '/divide':
           operation = 'divide';
           result = divide(a, b);
+          break;
+
+        case '/modulo':
+          operation = 'modulo';
+          result = modulo(a, b);
           break;
 
         case '/power':

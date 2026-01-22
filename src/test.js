@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide, power, squareRoot, validateApiKey } = require('./index');
+const { add, subtract, multiply, divide, modulo, power, squareRoot, validateApiKey } = require('./index');
 
 let passed = 0;
 let failed = 0;
@@ -39,6 +39,10 @@ test('multiply: 5 * 6 = 30', () => assertEqual(multiply(5, 6), 30));
 test('divide: 20 / 4 = 5', () => assertEqual(divide(20, 4), 5));
 test('divide: throws error on division by zero', () => assertThrows(() => divide(10, 0), 'Division by zero'));
 test('divide: throws error on division by zero with negative dividend', () => assertThrows(() => divide(-10, 0), 'Division by zero'));
+test('modulo: 10 % 3 = 1', () => assertEqual(modulo(10, 3), 1));
+test('modulo: 20 % 7 = 6', () => assertEqual(modulo(20, 7), 6));
+test('modulo: 15 % 5 = 0', () => assertEqual(modulo(15, 5), 0));
+test('modulo: throws error on modulo by zero', () => assertThrows(() => modulo(10, 0), 'Division by zero'));
 
 // Premium feature tests (require TEST_API_KEY env variable)
 console.log('\n--- Premium Features (require TEST_API_KEY) ---');
