@@ -1,0 +1,48 @@
+name: Weekly Summary
+
+on:
+  # Run every Monday at 9am UTC
+  schedule:
+    - cron: '0 9 * * 1'
+
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  weekly-summary:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for git log
+
+      - name: Run Claude Weekly Summary
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+          prompt: |
+            Please create a weekly summary for this repository. Analyze:
+
+            1. **Recent Activity**: Check git log for commits in the last 7 days
+            2. **Open Issues**: List any open issues and their status
+            3. **Open PRs**: List any open pull requests
+            4. **Code Health**: Any obvious issues or improvements needed?
+
+            Create a new GitHub issue titled "Weekly Summary - [DATE]" with your findings.
+            Use the `gh` CLI to create the issue.
+
+            Keep it concise but informative. Include:
+            - Number of commits this week
+            - Key changes made
+            - Any open items needing attention
+            - Suggestions for next week
+
+          claude_args: '--allowedTools Bash(git:*),Bash(gh issue:*),Bash(gh pr:*)'

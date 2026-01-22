@@ -70,6 +70,7 @@ function validateApiKey(env) {
 
 // Request handler
 export default {
+  // HTTP request handler
   async fetch(request, env) {
     const url = new URL(request.url);
     const path = url.pathname;
@@ -171,5 +172,34 @@ export default {
         error: error.message
       }), { status: 400, headers });
     }
+  },
+
+  // Scheduled cron handler
+  async scheduled(event, env, ctx) {
+    const timestamp = new Date().toISOString();
+    const cronType = event.cron;
+
+    console.log(`[CRON] Triggered at ${timestamp} by schedule: ${cronType}`);
+
+    // Example: You could call an external API, clean up data, send notifications, etc.
+    // For demo, we'll just log some stats
+
+    const stats = {
+      timestamp,
+      cron: cronType,
+      message: 'Calculator API health check from cron',
+      randomCalculation: {
+        operation: 'factorial',
+        input: 10,
+        result: factorial(10)
+      }
+    };
+
+    console.log(`[CRON] Stats:`, JSON.stringify(stats));
+
+    // You could store this in KV, D1, or send to an external service
+    // Example: await env.MY_KV.put('last_cron_run', JSON.stringify(stats));
+
+    return stats;
   }
 };
