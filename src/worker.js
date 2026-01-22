@@ -43,6 +43,20 @@ function squareRoot(n, env) {
   return Math.sqrt(n);
 }
 
+function factorial(n) {
+  if (n < 0) {
+    throw new Error('Cannot calculate factorial of negative number');
+  }
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
 function validateApiKey(env) {
   const apiKey = env.TEST_API_KEY;
   if (!apiKey) {
@@ -87,6 +101,7 @@ export default {
               '/modulo': 'Modulo (remainder) of a divided by b (?a=10&b=3)',
               '/power': 'Calculate a^b (?a=2&b=3) [Premium]',
               '/sqrt': 'Square root of a (?a=16) [Premium]',
+              '/factorial': 'Calculate factorial of a (?a=5)',
               '/health': 'Health check',
             }
           }), { headers });
@@ -132,6 +147,11 @@ export default {
           result = squareRoot(a, env);
           break;
 
+        case '/factorial':
+          operation = 'factorial';
+          result = factorial(a);
+          break;
+
         default:
           return new Response(JSON.stringify({
             error: 'Not found',
@@ -142,7 +162,7 @@ export default {
       return new Response(JSON.stringify({
         operation,
         a,
-        b: operation === 'sqrt' ? undefined : b,
+        b: (operation === 'sqrt' || operation === 'factorial') ? undefined : b,
         result
       }), { headers });
 

@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide, modulo, power, squareRoot, validateApiKey } = require('./index');
+const { add, subtract, multiply, divide, modulo, power, squareRoot, factorial, validateApiKey } = require('./index');
 
 let passed = 0;
 let failed = 0;
@@ -43,6 +43,11 @@ test('modulo: 10 % 3 = 1', () => assertEqual(modulo(10, 3), 1));
 test('modulo: 20 % 7 = 6', () => assertEqual(modulo(20, 7), 6));
 test('modulo: 15 % 5 = 0', () => assertEqual(modulo(15, 5), 0));
 test('modulo: throws error on modulo by zero', () => assertThrows(() => modulo(10, 0), 'Division by zero'));
+test('factorial: 0! = 1', () => assertEqual(factorial(0), 1));
+test('factorial: 1! = 1', () => assertEqual(factorial(1), 1));
+test('factorial: 5! = 120', () => assertEqual(factorial(5), 120));
+test('factorial: 10! = 3628800', () => assertEqual(factorial(10), 3628800));
+test('factorial: throws error on negative number', () => assertThrows(() => factorial(-1), 'Cannot calculate factorial of negative number'));
 
 // Premium feature tests (require TEST_API_KEY env variable)
 console.log('\n--- Premium Features (require TEST_API_KEY) ---');

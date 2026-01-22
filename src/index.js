@@ -51,6 +51,20 @@ function squareRoot(n) {
   return Math.sqrt(n);
 }
 
+function factorial(n) {
+  if (n < 0) {
+    throw new Error('Cannot calculate factorial of negative number');
+  }
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
 module.exports = {
   add,
   subtract,
@@ -59,6 +73,7 @@ module.exports = {
   modulo,
   power,
   squareRoot,
+  factorial,
   validateApiKey
 };
 
