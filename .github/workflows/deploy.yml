@@ -50,7 +50,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '3'
+          wranglerVersion: '3.99.0'
           command: deploy --env preview --config wrangler.jsonc
           secrets: |
             TEST_API_KEY
@@ -82,7 +82,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '3'
+          wranglerVersion: '3.99.0'
           command: deploy --config wrangler.jsonc
           secrets: |
             TEST_API_KEY
